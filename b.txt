@@ -1,5 +1,3 @@
-fast_fall = 0
-fast_fall_temp = 0
 if state_type = "jump" || state_type = "stand" || state_type = "run" || state_type = "crouch" {
         state_type = "air_attack"
         attack_type = "b"
@@ -16,41 +14,30 @@ if ( timer < time )
     switch ( timer )
     {
 	case 5: image_index = 1; break;
+	case 10: image_index = 2; break;
+	case 15: image_index = 3; break;
+	case 20: image_index = 4; break;
+	case 25: image_index = 5; break;
+	case 30: image_index = 6; break;
+	case 35: image_index = 7; break;
+	case 40: image_index = 8; break;
+	case 45: image_index = 9; break;
+	case 50: image_index = 10; break;
+	case 55: image_index = 11; break;
     }
-	  
-	/*
-	if timer = 4
-	{
-	create_hitbox(1,angle_correct(angle_here),3,4,5,6,punch3,obj_spark_hit1,1,1,abs(place_x(20)),-place_y(20),self.id,10,3);
-	hitbox.image_angle = angle_correct(angle_here)
-	}
-	*/
-	
-	/*
-	if timer = 4
-	{
-	projectilething =
-	create_projectile(5, angle_correct(angle_here), 5, 6.25, 15, 7.5, kick2, obj_spark_hit3, .25, .25, abs(place_x(130)), -place_y(104), self.id, 30, char_custom1);
-	projectilething.sprite_index = insert_sprite_here
-	projectilething.image_speed = .5;
-	
-	}
-	*/
-	
-	/*
-	if timer = 4
-	{
-	vfxthing = create_spark ( xpos , ypos , sprite_index , image_speed , xscale , yscale );
-	vfxthing.alarm[0] = lifespan of the spark here
-	vfxthing.snap = self.id;
-	vfxthing.owner = self.id;
-	vfxthing.keepmain = self.keepmain;
-	vfxthing.script = char_custom10;
-	}
-	*/
-  }
+	if timer = 1
+	     sound_play(b_voice);
+    if timer = 15 || timer = 16 || timer = 17 || timer = 14{
+	choseny = choose(20,22,24,26,28,30,32,34,36,38,40)
+	chosenx = choose(30,25,20,15,10,5,0,-5,-10,-15,-20-25,-30)
+	create_projectile (3,60+facing*60,5.4,2,12,8,slash2,obj_spark_slash2,1.0,1.0,chosenx,choseny,self.id,150,char_custom1);
+    proj.sprite_index = projectile_sprite;
+    proj.size = size;
+	proj.facing=facing
+	proj.scale = scale
+    }
   
-
+  }
 
 
 if timer >= time-2 && state_type != "flinch" && state_type != "air_flinch" {

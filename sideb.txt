@@ -1,9 +1,10 @@
 fast_fall = 0
 fast_fall_temp = 0
 if state_type = "jump" || state_type = "stand" || state_type = "run" || state_type = "crouch" {
+        if ( cantsideb ) exit;
         state_type = "air_attack"
         attack_type = "sideb"
-        image_speed = 0
+        image_speed = 0.5
         sprite_index = sideb_sprite
         image_index=0
         timer = 0
@@ -13,40 +14,42 @@ if state_type = "jump" || state_type = "stand" || state_type = "run" || state_ty
 if ( timer < time )
   {
 state_type = "air_attack"
-	switch (timer)
-	{
-		case 4: image_index = 1; break;
-	}
+
+if timer = 1
+	sound_play(sideb_voice);
+
+if ( timer == 2 || timer == 4 || timer == 6 || timer == 8 || timer == 10 || timer == 12 || timer == 14 || timer == 16 || timer == 18 || timer == 20 ) 
+      {
+	sound_play(slash3);
+	create_hitbox(1,25+facing*130,4,0,2,2,slash3,obj_spark_slash2,1.4,1.1,4,11,self.id,5,1);
+	hitbox.weight_kb = 1;
+        gravity = -0.5;
+      }
+    if ( timer = 22 )
+      {
+	sound_play(slash4);
+	create_hitbox(3,40+facing*100,6.5,2.5,5,8,slash3,obj_spark_slash3,1.4,1.1,4,11,self.id,3,2);
+	hitbox.hit_stun = 6;
+      }
+
+
 	  
-	/*
-	if timer = 4
-	{
-	create_hitbox(1,angle_correct(angle_here),3,4,5,6,punch3,obj_spark_hit1,1,1,abs(place_x(20)),-place_y(20),self.id,10,3);
-	hitbox.image_angle = angle_correct(angle_here)
-	}
-	*/
-	
-	/*
-	if timer = 4
-	{
-	projectilething =
-	create_projectile(5, angle_correct(angle_here), 5, 6.25, 15, 7.5, kick2, obj_spark_hit3, .25, .25, abs(place_x(130)), -place_y(104), self.id, 30, char_custom1);
-	projectilething.sprite_index = insert_sprite_here
-	projectilething.image_speed = .5;
-	}
-	*/
-	
-	/*
-	if timer = 4
-	{
-	vfxthing = create_spark ( xpos , ypos , sprite_index , image_speed , xscale , yscale );
-	vfxthing.alarm[0] = lifespan of the spark here
-	vfxthing.snap = self.id;
-	vfxthing.owner = self.id;
-	vfxthing.keepmain = self.keepmain;
-	vfxthing.script = char_custom10;
-	}
-	*/
+	if timer = 1 || timer = 3 || timer = 5
+        hspeed = 3.75-facing*7.5 
+	if timer = 7 || timer = 9 || timer = 11 || timer = 13
+        hspeed = 3.75-facing*7.5
+    if timer = 15 || timer = 17{
+        hspeed = 2.9 - facing*5.8
+    }
+    if timer = 19 || timer = 21 {
+        hspeed = 2.5 - facing*5
+    }
+    if timer = 23 {
+        hspeed = 0
+    }
+	  
+	  
+	  
 	  
   }
 
@@ -59,4 +62,5 @@ if timer >= time-1 && state_type != "flinch" && state_type != "air_flinch" {
         state_type = "stand";
     timer = 0;
     time =-1;
+    effect_create_above(ef_smokeup,x,y,0,c_silver)
 }
