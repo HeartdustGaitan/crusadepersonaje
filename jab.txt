@@ -1,0 +1,147 @@
+//PART 1 - START OF SETUP PART OF THE MOVE
+if ( state_type = "stand" || state_type = "run" )
+  {
+    state_type = "attack";
+    attack_type = "jab"
+    timer = 0;
+    time = 28;
+    sprite_index = jab_sprite;
+    image_speed = 0;
+    image_index = 0;
+    hspeed = 0;
+  }
+//PART 1 - END OF SETUP PART OF THE MOVE
+
+//PART 2 - THE JUICE OF THE MOVE - START
+if ( timer < time )
+  {
+  state_type = "attack";
+    switch ( timer )
+      {
+	case 4: image_index = 1; break;
+      }
+	
+	if (timer >= 4 and timer < 12) and attack_success and ai
+	attacking = 1
+	
+	if (timer >= 4 and timer < 12) and attacking and attack_success
+	{
+	sprite_index = jab_sprite2;
+	image_index = 0;
+	hspeed = 3*(1-facing*2)
+    timer = 40;
+    time = 61;
+	attacking = 0;
+	}
+	
+	if (timer >= 44 and timer < 52) and attack_success and ai
+	attacking = 1
+	
+	if (timer >= 44 and timer < 52) and attacking and attack_success
+	{
+	sprite_index = jab_sprite3;
+	image_index = 0;
+    timer = 80;
+    time = 107;
+	}
+	  
+	/*
+	if timer = 4
+	{
+	create_hitbox(1,angle_correct(angle_here),3,4,5,6,punch3,obj_spark_hit1,1,1,abs(place_x(20)),-place_y(20),self.id,10,3);
+	hitbox.image_angle = angle_correct(angle_here)
+	}
+	*/
+	
+	/*
+	if timer = 4
+	{
+	projectilething =
+	create_projectile(5, angle_correct(angle_here), 5, 6.25, 15, 7.5, kick2, obj_spark_hit3, .25, .25, abs(place_x(130)), -place_y(104), self.id, 30, char_custom1);
+	projectilething.sprite_index = insert_sprite_here
+	projectilething.image_speed = .5;
+	}
+	*/
+	
+	/*
+	if timer = 4
+	{
+	vfxthing = create_spark ( xpos , ypos , sprite_index , image_speed , xscale , yscale );
+	vfxthing.alarm[0] = lifespan of the spark here
+	vfxthing.snap = self.id;
+	vfxthing.owner = self.id;
+	vfxthing.keepmain = self.keepmain;
+	vfxthing.script = char_custom10;
+
+	// Head spin VFX
+	xx = (61-sprite_get_xoffset(sprite_index))*size*(1-facing*2)*0.7;
+	yy = (32-sprite_get_yoffset(sprite_index))*-size*0.7;
+	head_spin = create_blur(xx+x,y-yy,self.id);
+	head_spin.sprite_index = spr_spin_blur;
+	head_spin.image_xscale = 0.2 * size * (1-facing*2) * 0.7;
+	head_spin.image_yscale = 0.2 * size ;
+	head_spin.snap = self.id;
+	head_spin.alarm[0] = 40;
+	head_spin.image_index = 0;
+	head_spin.anim_speed = 1;
+	head_spin.image_angle = angle_correct(90);
+	head_spin.loop = 1;
+	
+	//FOR GIVING PUNCHES OR KICKS EXTRA IMPACT
+	burstvfx = instance_create ( place_x ( 40 ) + x , place_y ( 15 ) + y , obj_jab_burst );
+	burstvfx.snap = self.id;
+	burstvfx.image_xscale = xsize * 0.4;
+	burstvfx.image_yscale = ysize * 0.4;
+	
+	//NOT SURE WHAT THIS IS BUT I GUESS IT'S FOR WHIFFING? IDK
+	whiffer = gfx_ef_whiff ( x + 28 * ( 1 - facing * 2 )  * size , y - ( actual_height / 2 ) - 1 , 0.65 , 1 , 180 * facing );
+	
+	//A DIFFERENT VERSION OF THE DUST EFFECT, LOOKS MORE OPAQUE AND POTENT THAN THE REGULAR ONE
+	duster = instance_create(x+12*(1-facing*2),y,obj_dust_effect_bold);
+	duster.image_xscale *= 0.5*size;
+	duster.image_yscale *= 0.5*size;
+	duster.facing = !facing; 
+	
+	//AN EFFECT FOR SPINNY MOVES LIKE NAIRS AND WHATNOT
+	whirler = gfx_ef_whirl2 ( x  , (y-actual_height/2)+3 , 0.75*size, -20 * (1-facing*2) );
+	whirler.snap = self.id
+
+    //AN EFFECT FOR FLIPPING IN MIDAIR
+    gfx_ef_whirl2(x-1*(1-facing*2)*size,y-actual_height*.4,1,-20*(1-facing*2));
+	
+	//THE EFFECT THE GAME USES FOR WHEN SOMEONE LANDS ON THE FLOOR, ALSO INCLUDES A SOUND
+	gfx_land_effect ( x , y , actual_width );
+	
+	//THE YELLOW SPARK THING THAT GETS CREATED WHEN USING A SMASH ATTACK
+	part_particles_create ( psys_back , x - 20 + random ( 40) , y - 7 - random ( 9 ) , ptype_smashspark , 1 )
+	
+	//NEW SMASH CHARGE SPARK, THIS ONE'S BLUE AND IT LOOKS COOLER
+    eff = instance_create(place_x(69)+x,place_y(25)+y,obj_smash_charge);
+    eff.image_yscale = 0.4 * ysize;
+    eff.image_xscale = eff.image_yscale * (1-facing*2);
+    eff.depth = depth - 0.1;
+    eff.image_speed = 2;
+	
+	//DOUBLE JUMP EFFECT
+	
+	spark = instance_create(x*size,y-7*size,obj_spark_shockwave);
+	spark.image_xscale *= 0.5*size;
+	spark.image_yscale *= 0.1*size;
+	spark2 = instance_create(x*size,y-7*size,obj_spark_shockwave);
+	spark2.image_xscale *= 0.7*size;
+	spark2.image_yscale *= 0.2*size;
+	}
+	*/
+    
+  }
+//PART 2 - THE JUICE OF THE MOVE - END
+
+//PART 3 - GETTING OUT OF THE MOVE AND GOING BACK TO IDLE - START
+if ( timer >= time-1 && state_type != "flinch" && state_type != "air_flinch" )
+  {
+    state_type = "stand";
+    attack_type = "none";
+    timer = 0;
+    time = -1;
+  }
+//PART 3 - GETTING OUT OF THE MOVE AND GOING BACK TO IDLE - END

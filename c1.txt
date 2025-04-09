@@ -1,0 +1,41 @@
+
+	if timer = 1
+	{
+	facing = attacker.facing
+	visible = 1;
+	priority = 5
+	hitcheck = 0
+	moving_object = 1
+	speed = 5;
+	//direction = angle_correct(0) //ONLY WITH FACING GIVEN TO THE PROJ
+	//image_angle = direction+facing*180
+	}
+
+	if timer > 1 
+	{
+		
+	}
+
+	if hit {
+		time = original_duration_you_gave_this_projectile
+		alarm[0] = original_duration_you_gave_this_projectile
+		}
+		
+	if hit = 1 and hitcheck = 0
+	{
+	hitcheck = 1
+	}
+	
+	if hitcheck = 1 or ( next_to_rwall || next_to_lwall)
+	{
+	if hitcheck = 0
+	{
+	sound_play2(slash2);
+	instance_create(x,y,obj_spark_shockwave);
+	}
+	instance_destroy()
+	}
+		
+
+	//if ( next_to_rwall || next_to_lwall ||on_floor || on_platform ) && hit = 0
+	//instance_destroy()
